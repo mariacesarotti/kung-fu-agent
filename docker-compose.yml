@@ -1,0 +1,42 @@
+# Nome do projeto. Vira prefixo de containers, volumes e redes
+# (ex.: kung-fu-agent_pgdata). Sem isso, o Compose usa o nome da pasta.
+name: kung-fu-agent
+
+services:
+  db:
+    # Imagem oficial do pgvector: Postgres 17 com a extensão já instalada.
+    # Fixar a versão evita surpresa quando sair uma tag nova.
+    image: pgvector/pgvector:0.8.7-pg17
+    container_name: kung-fu-agent-db
+    restart: unless-stopped
+
+    # Variáveis lidas pela imagem oficial do Postgres na primeira inicialização.
+    # Os valores vêm do arquivo .env (interpolação do Compose).
+    # ${VAR:?msg} faz o Compose falhar com erro se a variável não existir.
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER no .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+      POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB no .env}
+
+    # HOST:CONTAINER. ${VAR:-5432} usa 5432 se a variável não estiver definida.
+    # O 127.0.0.1 deixa a porta acessível só na sua máquina, não na rede local.
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+
+    # Volume nomeado (declarado lá embaixo) montado onde o Postgres guarda os dados.
+    # Os dados sobrevivem a `docker compose down`; só somem com `down -v`.
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+    # pg_isready checa se o servidor aceita conexões.
+    # $$ escapa o $ para o Compose não interpolar: quem expande a variável
+    # é o shell dentro do container, usando o environment acima.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  pgdata:
