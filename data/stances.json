@@ -1,0 +1,112 @@
+[
+  {
+    "id": "sei_ping_ma",
+    "nome": "Sei Ping Ma",
+    "caracteres": "四平馬",
+    "outros_nomes": ["base do cavalo", "horse stance", "Ping Ma"],
+    "nivel": "iniciante",
+    "descricao": "Base larga e simétrica, com os pés paralelos a cerca de duas larguras de ombro e o peso dividido igualmente entre as pernas. Os joelhos dobram e empurram levemente para fora, as coxas descem em direção à linha horizontal e a coluna fica ereta. É a base de referência do Choy Lay Fut: as outras bases saem dela e voltam para ela.",
+    "beneficios": ["força e resistência isométrica das pernas", "enraizamento e estabilidade", "alinhamento postural da coluna e da pelve", "base para gerar potência nos socos com o giro da cintura"],
+    "musculos": ["quadríceps", "glúteo máximo", "glúteo médio", "adutores", "eretores da espinha", "core"],
+    "confianca": "alta"
+  },
+  {
+    "id": "ding_ji_ma",
+    "nome": "Ding Ji Ma",
+    "caracteres": "丁字馬",
+    "outros_nomes": ["Ji Ng Ma", "子午馬", "base de arco e flecha", "bow stance"],
+    "nivel": "iniciante",
+    "descricao": "Base longa e frontal, com a perna da frente dobrada e a de trás quase estendida, sustentando cerca de 60% do peso na frente. O joelho da frente fica alinhado ao pé e voltado levemente para dentro, protegendo a virilha. É a base dos golpes longos: a transição entre Sei Ping Ma e Ding Ji Ma gera o torque do soco.",
+    "beneficios": ["potência de avanço e alcance", "força unilateral das pernas", "alongamento do flexor do quadril da perna de trás", "transferência de força do chão para o golpe"],
+    "musculos": ["quadríceps", "glúteo máximo", "isquiotibiais", "panturrilha", "flexores do quadril", "oblíquos"],
+    "confianca": "alta"
+  },
+  {
+    "id": "diu_ma",
+    "nome": "Diu Ma",
+    "caracteres": "吊馬",
+    "outros_nomes": ["base do gato", "base suspensa", "cat stance"],
+    "nivel": "iniciante",
+    "descricao": "Base curta com quase todo o peso na perna de trás, dobrada, enquanto a perna da frente toca o chão só com a ponta do pé. A perna da frente fica livre para chutar, bloquear com a canela ou recuar rápido. Usada para absorver um ataque e responder sem precisar trocar o peso.",
+    "beneficios": ["equilíbrio sobre uma perna", "força excêntrica da perna de apoio", "estabilidade de tornozelo", "agilidade para chutar sem preparação"],
+    "musculos": ["quadríceps", "glúteo médio", "panturrilha", "músculos estabilizadores do tornozelo", "core"],
+    "confianca": "alta"
+  },
+  {
+    "id": "sieh_ma",
+    "nome": "Sieh Ma",
+    "caracteres": "斜馬",
+    "outros_nomes": ["base oblíqua", "base defensiva lateral"],
+    "nivel": "iniciante",
+    "descricao": "Variação lateral do Sei Ping Ma em que o peso recua para a perna de trás e o tronco fica de lado para o oponente. Reduz a área exposta do corpo e mantém a distância longa, típica do estilo. Funciona como base de espera e de defesa antes de entrar com golpes circulares.",
+    "beneficios": ["força de pernas com o peso deslocado", "mobilidade de quadril", "consciência de ângulo e distância", "proteção da linha central"],
+    "musculos": ["quadríceps", "adutores", "glúteo médio", "oblíquos"],
+    "confianca": "media"
+  },
+  {
+    "id": "tau_ma",
+    "nome": "Tau Ma",
+    "caracteres": "偷馬",
+    "outros_nomes": ["base roubada", "passo cruzado por trás", "stealing step"],
+    "nivel": "intermediario",
+    "descricao": "Base cruzada em que um pé passa por trás do outro, com os joelhos dobrados e as pernas torcidas. Permite mudar de direção ou fechar a distância de forma disfarçada, sem que o oponente perceba o deslocamento. Exige controle de equilíbrio, porque a base é estreita no momento da troca.",
+    "beneficios": ["agilidade e mudança de direção", "coordenação entre quadril e pés", "equilíbrio em base estreita", "mobilidade rotacional do quadril"],
+    "musculos": ["glúteo médio", "rotadores do quadril", "adutores", "quadríceps", "oblíquos"],
+    "confianca": "alta"
+  },
+  {
+    "id": "nau_ma",
+    "nome": "Nau Ma",
+    "caracteres": "扭馬",
+    "outros_nomes": ["base torcida", "twisting stance"],
+    "nivel": "intermediario",
+    "descricao": "Base em que as pernas se cruzam e o corpo torce sobre o eixo, com os pés girando no lugar. Serve para tirar o corpo da linha de ataque girando, sem recuar em linha reta, e já deixa a cintura carregada para o contra-ataque. Muito usada na transição entre direções nas formas.",
+    "beneficios": ["força rotacional do tronco", "mobilidade de quadril e coluna torácica", "equilíbrio em rotação", "esquiva sem perder a posição"],
+    "musculos": ["oblíquos", "rotadores do quadril", "glúteo médio", "quadríceps", "panturrilha"],
+    "confianca": "alta"
+  },
+  {
+    "id": "gwai_ma",
+    "nome": "Gwai Ma",
+    "caracteres": "跪馬",
+    "outros_nomes": ["base ajoelhada", "kneeling stance"],
+    "nivel": "intermediario",
+    "descricao": "Base baixa em que o joelho de trás desce em direção ao chão, sem apoiar, enquanto a perna da frente fica dobrada. Abaixa o centro de gravidade para passar sob um golpe alto e atacar a linha baixa. Também aparece em algumas escolas como base cruzada, por isso a grafia e o desenho variam.",
+    "beneficios": ["força de pernas em amplitude máxima", "mobilidade de joelhos e tornozelos", "controle do centro de gravidade", "troca de nível rápida"],
+    "musculos": ["quadríceps", "glúteo máximo", "flexores do quadril", "panturrilha", "core"],
+    "confianca": "media"
+  },
+  {
+    "id": "dok_lap_ma",
+    "nome": "Dok Lap Ma",
+    "caracteres": "獨立馬",
+    "outros_nomes": ["base de uma perna", "base da garça", "single leg stance"],
+    "nivel": "intermediario",
+    "descricao": "Base sobre uma perna só, com a outra recolhida e o joelho elevado à altura do quadril. Protege a linha baixa contra varreduras e chutes, prepara um chute e treina o equilíbrio. Aparece com destaque nas técnicas de garça das formas de animais.",
+    "beneficios": ["equilíbrio estático", "propriocepção", "força do core", "estabilidade do tornozelo e do quadril de apoio"],
+    "musculos": ["glúteo médio", "flexores do quadril", "core", "músculos estabilizadores do tornozelo", "panturrilha"],
+    "confianca": "alta"
+  },
+  {
+    "id": "pok_ma",
+    "nome": "Pok Ma",
+    "caracteres": "仆馬",
+    "outros_nomes": ["base rasteira", "drop stance", "仆步 pubu"],
+    "nivel": "avancado",
+    "descricao": "Base muito baixa em que uma perna dobra totalmente, com o quadril quase no calcanhar, e a outra estende de lado rente ao chão. Usada para mergulhar sob um ataque, alcançar a perna do oponente ou executar varreduras. Exige flexibilidade de adutores e tornozelos, por isso entra mais tarde no treino.",
+    "beneficios": ["flexibilidade de adutores e isquiotibiais", "força em amplitude extrema", "mobilidade de tornozelo", "transições rápidas entre alto e baixo"],
+    "musculos": ["adutores", "quadríceps", "glúteo máximo", "isquiotibiais", "panturrilha"],
+    "confianca": "baixa"
+  },
+  {
+    "id": "jau_ma",
+    "nome": "Jau Ma",
+    "caracteres": "走馬",
+    "outros_nomes": ["base em movimento", "passo deslizado", "moving stance"],
+    "nivel": "avancado",
+    "descricao": "Não é uma posição fixa, e sim o deslocamento entre bases: o pé desliza rente ao chão, o centro de gravidade fica na mesma altura e o corpo chega já em base firme para golpear. Junta o trabalho das outras bases em combate real, quando é preciso entrar, sair e mudar de ângulo sem perder o enraizamento.",
+    "beneficios": ["agilidade e controle de distância", "resistência das pernas em deslocamento contínuo", "coordenação entre bases e golpes", "equilíbrio dinâmico"],
+    "musculos": ["quadríceps", "glúteo médio", "panturrilha", "adutores", "core"],
+    "confianca": "baixa"
+  }
+]

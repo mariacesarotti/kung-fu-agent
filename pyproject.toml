@@ -7,7 +7,11 @@ authors = [
     { name = "Maria Cesarotti", email = "mariacesarotti@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "google-genai>=2.31.0",
+    "pgvector>=0.5.1",
+    "psycopg>=3.3.6",
+]
 
 [project.scripts]
 kung-fu-agent = "kung_fu_agent:main"
