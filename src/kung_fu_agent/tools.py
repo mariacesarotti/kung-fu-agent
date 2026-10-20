@@ -1,6 +1,7 @@
 import json
-
 import psycopg
+import logging
+
 from google import genai
 
 from kung_fu_agent.db import connect
@@ -57,6 +58,7 @@ TOOLS = [
     },
 ]
 
+logger = logging.getLogger(__name__)
 
 def dispatch_tool(
     conn: psycopg.Connection, client: genai.Client, name: str, arguments: dict
@@ -70,11 +72,15 @@ def dispatch_tool(
             return _error(f"Ferramenta desconhecida: {name}.")
     except KeyError as exc:
         return _error(f"Faltou o argumento {exc} para {name}.")
-    except psycopg.Error as exc:
-        conn.rollback()
-        return _error(f"Erro no banco: {exc}")
-    except Exception as exc:
+    except ValueError as exc:
         return _error(str(exc))
+    except psycopg.Error:
+        logger.exception("Erro no banco ao executar %s", name)
+        conn.rollback()
+        return _error("Erro ao consultar o banco de dados.")
+    except Exception:
+        logger.exception("Erro ao executar %s", name)
+        return _error("Erro interno ao executar a ferramenta.")
     return json.dumps(result, ensure_ascii=False), False
 
 

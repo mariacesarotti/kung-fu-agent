@@ -1,6 +1,7 @@
 import os
 import psycopg
 from google import genai
+from google.genai._gaos.lib.compat_errors import APIError as InteractionsAPIError
 from google.genai.interactions import FunctionCallStep, Interaction
 
 from kung_fu_agent.db import connect
@@ -8,7 +9,7 @@ from kung_fu_agent.tools import TOOLS, dispatch_tool
 
 AGENT_MODEL = os.environ.get("AGENT_MODEL", "gemini-3.5-flash-lite")
 MAX_TURNS = 5
-
+REQUEST_TIMEOUT = 60
 SYSTEM_INSTRUCTION = """\
 Você é um assistente de treino de posturas (bases) do Kung Fu Choy Lay Fut.
 Responda sempre em português do Brasil, de forma direta.
@@ -29,6 +30,10 @@ ajudar com isso e não chame nenhuma ferramenta.
 
 LIMIT_MESSAGE = "Não consegui concluir a resposta dentro do limite de chamadas de ferramenta."
 
+class ModelError(Exception):
+    def __init__(self, retryable: bool) -> None:
+        super().__init__("Falha ao chamar o modelo.")
+        self.retryable = retryable
 
 def run_agent(
     conn: psycopg.Connection, client: genai.Client, question: str
@@ -37,12 +42,18 @@ def run_agent(
     request: dict = {"input": question}
 
     for _ in range(MAX_TURNS):
-        interaction = client.interactions.create(
-            model=AGENT_MODEL,
-            tools=TOOLS,
-            system_instruction=SYSTEM_INSTRUCTION,
-            **request,
-        )
+        try:
+            interaction = client.interactions.create(
+                model=AGENT_MODEL,
+                tools=TOOLS,
+                system_instruction=SYSTEM_INSTRUCTION,
+                timeout=REQUEST_TIMEOUT,
+                **request,
+            )
+        except InteractionsAPIError as exc:
+            status = exc.status_code
+            retryable = status is None or status == 429 or status >= 500
+            raise ModelError(retryable) from exc
         if not isinstance(interaction, Interaction):
             raise TypeError("Resposta em streaming inesperada; o agente espera stream=False.")
 
