@@ -159,13 +159,13 @@ tests/
 
 ## What I learned
 
-**Embeddings are a design decision, not a library call.** Choosing what goes into each chunk changed what the search could find. I learned to write the chunk text for the model to read, not for Python to print: a list turned into `['strength', 'balance']` is noise, and a field left out of the text simply doesn't exist for the search.
+**Embeddings are a design decision** Choosing what goes into each chunk changed what the search could find. I learned to write the chunk text for the model to read, not for Python to print: a list turned into `['strength', 'balance']` is noise, and a field left out of the text simply doesn't exist for the search.
 
 **Similarity search never says "I don't know".** My first test included a carrot cake recipe on purpose. It still came back with three stances, just further away (0.48 against 0.27 to 0.33 for real questions). That number became the threshold in the agent's instructions. I liked deciding something from my own measurements instead of guessing.
 
-**The model only asks; my code does.** Function calling clicked when I saw that the model never runs anything. It sends a name and some arguments, and those arguments can be wrong, so I validate them like any other user input. Returning errors to the model, instead of crashing, lets it correct itself.
+**The model only asks** Function calling clicked when I saw that the model never runs anything. It sends a name and some arguments, and those arguments can be wrong, so I validate them like any other user input. Returning errors to the model, instead of crashing, lets it correct itself.
 
-**Read the docs, then read them again.** I assumed `previous_interaction_id` kept the whole conversation, including the tools and the system instruction. It only keeps the history. That one sentence would have made the final answer ignore all my rules.
+**Read the docs** I assumed `previous_interaction_id` kept the whole conversation, including the tools and the system instruction. It only keeps the history. That one sentence would have made the final answer ignore all my rules.
 
 **A hang is an error you can't see yet.** At one point the agent just stopped responding. Testing the call in isolation, outside the project, and then through a different API finally showed the real message: the model was overloaded, and the SDK was retrying quietly. Now every call has a timeout, and I test new pieces alone before connecting them.
 
