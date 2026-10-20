@@ -62,15 +62,21 @@ Client = Annotated[genai.Client, Depends(get_client)]
 @app.post("/ask")
 def ask(body: AskRequest, conn: Conn, client: Client) -> AskResponse:
     answer, tool_calls = run_agent(conn, client, body.question)
-    return AskResponse(answer=answer, tool_calls=[ToolCall(**call) for call in tool_calls])
+    return AskResponse(
+        answer=answer, tool_calls=[ToolCall(**call) for call in tool_calls]
+    )
 
 
 @app.exception_handler(psycopg.OperationalError)
-async def database_unavailable(request: Request, exc: psycopg.OperationalError) -> JSONResponse:
+async def database_unavailable(
+    request: Request, exc: psycopg.OperationalError
+) -> JSONResponse:
     logger.error("Banco indisponível", exc_info=exc)
     return JSONResponse(
         status_code=503,
-        content={"detail": "Serviço temporariamente indisponível. Tente de novo em instantes."},
+        content={
+            "detail": "Serviço temporariamente indisponível. Tente de novo em instantes."
+        },
     )
 
 
@@ -80,7 +86,9 @@ async def model_failed(request: Request, exc: ModelError) -> JSONResponse:
     if exc.retryable:
         return JSONResponse(
             status_code=503,
-            content={"detail": "O modelo está indisponível agora. Tente de novo em instantes."},
+            content={
+                "detail": "O modelo está indisponível agora. Tente de novo em instantes."
+            },
         )
     return JSONResponse(
         status_code=502,

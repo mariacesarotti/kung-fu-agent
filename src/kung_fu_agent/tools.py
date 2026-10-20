@@ -1,7 +1,7 @@
 import json
-import psycopg
 import logging
 
+import psycopg
 from google import genai
 
 from kung_fu_agent.db import connect
@@ -59,6 +59,7 @@ TOOLS = [
 ]
 
 logger = logging.getLogger(__name__)
+
 
 def dispatch_tool(
     conn: psycopg.Connection, client: genai.Client, name: str, arguments: dict

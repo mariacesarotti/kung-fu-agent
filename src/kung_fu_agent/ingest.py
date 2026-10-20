@@ -7,8 +7,8 @@ from pgvector import Vector
 from psycopg import sql
 
 from kung_fu_agent.chunking import build_chunk_text
-from kung_fu_agent.embeddings import EMBEDDING_DIM, embed_text
 from kung_fu_agent.db import connect
+from kung_fu_agent.embeddings import EMBEDDING_DIM, embed_text
 
 DATA_PATH = Path(__file__).parents[2] / "data" / "stances.json"
 
@@ -43,6 +43,7 @@ def ensure_schema(conn: psycopg.Connection) -> None:
 def load_stances(path: Path) -> list[dict]:
     with path.open(encoding="utf-8") as f:
         return json.load(f)
+
 
 def ingest(conn: psycopg.Connection, client: genai.Client, stances: list[dict]) -> int:
     for stance in stances:

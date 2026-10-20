@@ -9,6 +9,7 @@ from kung_fu_agent.chunking import build_chunk_text
 EMBEDDING_MODEL = "gemini-embedding-2"
 EMBEDDING_DIM = 768
 
+
 def embed_text(client: genai.Client, text: str) -> list[float]:
     result = client.models.embed_content(
         model=EMBEDDING_MODEL,

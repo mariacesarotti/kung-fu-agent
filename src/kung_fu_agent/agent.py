@@ -1,4 +1,7 @@
+# A v2.31 do google-genai não exporta os erros da Interactions API.
+# O import privado fica só aqui: o resto do projeto conhece apenas o ModelError.
 import os
+
 import psycopg
 from google import genai
 from google.genai._gaos.lib.compat_errors import APIError as InteractionsAPIError
@@ -28,12 +31,16 @@ Se a pergunta não for sobre Kung Fu ou sobre as posturas, diga que só pode
 ajudar com isso e não chame nenhuma ferramenta.
 """
 
-LIMIT_MESSAGE = "Não consegui concluir a resposta dentro do limite de chamadas de ferramenta."
+LIMIT_MESSAGE = (
+    "Não consegui concluir a resposta dentro do limite de chamadas de ferramenta."
+)
+
 
 class ModelError(Exception):
     def __init__(self, retryable: bool) -> None:
         super().__init__("Falha ao chamar o modelo.")
         self.retryable = retryable
+
 
 def run_agent(
     conn: psycopg.Connection, client: genai.Client, question: str
@@ -55,9 +62,15 @@ def run_agent(
             retryable = status is None or status == 429 or status >= 500
             raise ModelError(retryable) from exc
         if not isinstance(interaction, Interaction):
-            raise TypeError("Resposta em streaming inesperada; o agente espera stream=False.")
+            raise TypeError(
+                "Resposta em streaming inesperada; o agente espera stream=False."
+            )
 
-        calls = [step for step in interaction.steps or [] if isinstance(step, FunctionCallStep)]
+        calls = [
+            step
+            for step in interaction.steps or []
+            if isinstance(step, FunctionCallStep)
+        ]
         if not calls:
             return interaction.output_text or "", tool_calls
 
