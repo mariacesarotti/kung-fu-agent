@@ -1,7 +1,7 @@
 [project]
 name = "kung-fu-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "RAG agent for Choy Lay Fut stances with Gemini, pgvector and FastAPI"
 readme = "README.md"
 authors = [
     { name = "Maria Cesarotti", email = "mariacesarotti@gmail.com" }
