@@ -20,3 +20,13 @@ kung-fu-agent = "kung_fu_agent:main"
 [build-system]
 requires = ["uv_build>=0.12.22,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:'_UnionGenericAlias' is deprecated:DeprecationWarning:google.genai.*",
+]
